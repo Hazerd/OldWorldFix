@@ -30,8 +30,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Substrate">
-      <HintPath>Substrate.dll</HintPath>
+    <Reference Include="Substrate.net40-client">
+      <HintPath>Substrate.net40-client.dll</HintPath>
+    </Reference>
+    <Reference Include="Substrate.Entities.net40-client">
+      <HintPath>Substrate.Entities.net40-client.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -39,7 +42,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Substrate.dll" />
+    <None Include="Substrate.Entities.net40-client.dll" />
+    <None Include="Substrate.net40-client.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
