@@ -15,5 +15,28 @@ namespace OldWorldFix
             Console.ReadKey();
             return true;
         }
+
+        private static bool RequestConfirmation(bool enter, string trueMessage, string falseMessage)
+        {
+            while (true)
+            {
+                Console.Write("Would you like to apply this change? ({0}): ", enter ? "Y,n" : "y,N");
+                switch (Console.ReadKey().Key)
+                {
+                    case ConsoleKey.Y:
+                        Console.WriteLine("\r\n{0}", trueMessage);
+                        return true;
+                    case ConsoleKey.N:
+                        Console.WriteLine("\r\n{0}", falseMessage);
+                        return false;
+                    case ConsoleKey.Enter:
+                        Console.WriteLine("\r\n{0}", enter ? trueMessage : falseMessage);
+                        return enter;
+                    default:
+                        Console.WriteLine("\r\nPlease enter 'Y' or 'N'");
+                        break;
+                }
+            }
+        }
     }
 }
