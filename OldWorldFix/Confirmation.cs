@@ -38,5 +38,16 @@ namespace OldWorldFix
                 }
             }
         }
+
+        internal static bool FixPotionsConfirmation()
+        {
+            Console.WriteLine("In 1.9, the way potions determine their effects was changed.\r\n" +
+            "In versions 1.9-1.12 any old potions will work fine. and any potions 'seen' by a player will be converted to new potions.\r\n" +
+            "However, if the world is loaded in version 1.13 or later, any 'old' potions will be converted into water bottles.\r\n" +
+            "This can be fixed, but the world will become incompatible with versions prior to 1.9.\r\n" +
+            "If you plan to play the map in version 1.13+, press 'Y' to apply the potion fix.\r\n" +
+            "If you plan to play the map in versions prior to 1.9, press 'N' to leave potions the way they are.\r\n");
+            return RequestConfirmation(false, "Thank you. Potions WILL be fixed. This world will no longer be compatible with versions prior to 1.9.", "Thank you. Potions WILL NOT be fixed. This world will remain compatible with version prior to 1.9, but potions will automatically turn into water bottles if loaded in 1.13 or later.");
+        }
     }
 }

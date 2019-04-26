@@ -1,0 +1,4 @@
+[submodule "Substrate"]
+	path = Substrate
+	url = https://github.com/Hazerdous/Substrate
+	branch = 2.x
