@@ -30,12 +30,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Substrate.net40-client">
-      <HintPath>Substrate.net40-client.dll</HintPath>
-    </Reference>
-    <Reference Include="Substrate.Entities.net40-client">
-      <HintPath>Substrate.Entities.net40-client.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -43,8 +37,14 @@
     <Compile Include="Confirmation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Substrate.Entities.net40-client.dll" />
-    <None Include="Substrate.net40-client.dll" />
+    <ProjectReference Include="..\Substrate\Substrate\Substrate.csproj">
+      <Project>{7264A1C4-AB4A-4437-B252-7379B98B5509}</Project>
+      <Name>Substrate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Substrate\Substrate.Entities\Substrate.Entities.csproj">
+      <Project>{2D269AE0-C025-4647-BA9C-1DB2B84A4E55}</Project>
+      <Name>Substrate.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
