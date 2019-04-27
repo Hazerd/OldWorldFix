@@ -202,28 +202,34 @@ namespace OldWorldFix
 
         private static bool FixPotion(ref Item item)
         {
-            int slot = item.Slot.GetValueOrDefault();
-            int damage = item.Damage;
-            string potionEffect = PotionEffects[damage & 15];
-            string potionPrefix = "";
-            if ((damage & 32) == 32)
-                potionPrefix = "strong_";
-            else if ((damage & 64) == 64)
-                potionPrefix = "long_";
-            string potionId = ItemInfo.Potion.NameID;
-            if ((damage & 8192) == 8192)
-                potionId = ItemInfo.Potion.NameID;
-            else if ((damage & 16384) == 16384)
-                potionId = ItemInfo.SplashPotion.NameID;
-            if (potionPrefix == "strong_" && (potionEffect == "fire_resistance" || potionEffect == "night_vision" || potionEffect == "weakness" || potionEffect == "slowness" || potionEffect == "water_breating" || potionEffect == "invisibility"))
-                item.Tag.Potion = "minecraft:" + potionEffect;
-            else if (potionPrefix == "long_" && (potionEffect == "healing" || potionEffect == "harming"))
-                item.Tag.Potion = "minecraft:" + potionEffect;
-            else
-                item.Tag.Potion = "minecraft:" + potionPrefix + potionEffect;
-            item.Damage = 0;
-            item.ID = potionId;
-            return true;
+            if (item.Source.ContainsKey("tag") && item.Source["tag"].ToTagCompound().ContainsKey("CustomPotionEffects"))
+                return false;
+            if (string.IsNullOrEmpty(item.Tag.Potion))
+            {
+                if (item.Damage == 0)
+                    return false;
+                string potionEffect = PotionEffects[item.Damage & 15];
+                string potionPrefix = "";
+                if ((item.Damage & 32) == 32)
+                    potionPrefix = "strong_";
+                else if ((item.Damage & 64) == 64)
+                    potionPrefix = "long_";
+                string potionId = ItemInfo.Potion.NameID;
+                if ((item.Damage & 8192) == 8192)
+                    potionId = ItemInfo.Potion.NameID;
+                else if ((item.Damage & 16384) == 16384)
+                    potionId = ItemInfo.SplashPotion.NameID;
+                if (potionPrefix == "strong_" && (potionEffect == "fire_resistance" || potionEffect == "night_vision" || potionEffect == "weakness" || potionEffect == "slowness" || potionEffect == "water_breating" || potionEffect == "invisibility"))
+                    item.Tag.Potion = "minecraft:" + potionEffect;
+                else if (potionPrefix == "long_" && (potionEffect == "healing" || potionEffect == "harming"))
+                    item.Tag.Potion = "minecraft:" + potionEffect;
+                else
+                    item.Tag.Potion = "minecraft:" + potionPrefix + potionEffect;
+                item.Damage = 0;
+                item.ID = potionId;
+                return true;
+            }
+            return false;
         }
     }
 }
