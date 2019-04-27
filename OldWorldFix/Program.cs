@@ -46,22 +46,26 @@ namespace OldWorldFix
             NbtWorld world = NbtWorld.Open(path);
             if (world == null)
             {
-                Confirmation.WorldInvalidConfirmation();
+                Dialog.WorldInvalidDialog();
                 return;
             }
             Console.WriteLine("Working with world: {0}", world.Level.LevelName);
-            fixPotions = Confirmation.FixPotionsConfirmation();
+            fixPotions = Dialog.FixPotionsDialog();
+            DateTime startTime = DateTime.Now;
             LoopChunks(world, Dimension.DEFAULT);
             LoopChunks(world, Dimension.NETHER);
             LoopChunks(world, Dimension.THE_END);
-            Console.Write("Finished searching {0}. Fixed:", world.Level.LevelName);
+            TimeSpan time = DateTime.Now.Subtract(startTime);
+            Console.Write("Finished searching {0} in {1}. Fixed:", world.Level.LevelName, time.ToString(@"h\:mm\:ss"));
             Console.Write(" [{0} chest{1}]", fixedIssues["chest"], fixedIssues["chest"] == 1 ? "" : "s");
             Console.Write(" [{0} potion{1}]", fixedIssues["potion"], fixedIssues["potion"] == 1 ? "" : "s");
             Console.WriteLine();
+            Dialog.NewDialog();
         }
 
         private static void LoopChunks(NbtWorld world, int dim)
         {
+            DateTime startTime = DateTime.Now;
             Console.WriteLine("Searching {0}", dimensions[dim]);
             int fixedChests = 0;
             int fixedPotions = 0;
@@ -105,7 +109,8 @@ namespace OldWorldFix
                 }
                 chunks.Save();
             }
-            Console.Write("Finished searching {0}. Fixed:", dimensions[dim]);
+            TimeSpan time = DateTime.Now.Subtract(startTime);
+            Console.Write("Finished searching {0} in {1}. Fixed:", dimensions[dim], time.ToString(@"h\:mm\:ss"));
             Console.Write(" [{0} chest{1}]", fixedChests, fixedChests == 1 ? "" : "s");
             Console.Write(" [{0} potion{1}]", fixedPotions, fixedPotions == 1 ? "" : "s");
             Console.WriteLine();
