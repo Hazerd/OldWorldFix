@@ -114,5 +114,22 @@ namespace OldWorldFix
                 false
             );
         }
+
+        internal static bool FixSpawnersDialog()
+        {
+            return NewDialog(
+                new string[]
+                {
+                "In 1.8, the data format for spawners change. Most spawners should convert automatically.",
+                "However, since 1.11 old custom potion spawners will break, and since 1.13 will corrupt chunks.",
+                "This can be fixed, but it is possible the fix may cause problems in previous versions.",
+                "Only custom spawners that spawn potions are affected."
+                },
+                "Would you like to fix spawners?",
+                "Thank you. Custom potion spawners WILL be fixed. Please report any spawner bugs you encounter.",
+                "Thank you. Custom potion spawners WILL NOT be fixed. If this world is loaded in 1.11 or 1.12, the spawners will cease to function. If loaded in 1.13, any chunks containing custom potion spawners will be reset.",
+                false
+            );
+        }
     }
 }
