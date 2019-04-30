@@ -6,6 +6,8 @@ Minecraft custom worlds created for older versions of the game have many problem
 Issues currently fixed:
 * (1.8+) Chests disappear.
 * (1.13+) Potions turn into water bottles.
+* (1.11+) Custom potion spawners spawn nothing.
+* (1.13+) Custom potion spawners cause chunk errors.
 * More to come!
 
 Issues planned to be fixed:
